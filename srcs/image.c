@@ -6,11 +6,11 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/19 19:34:33 by takiapo           #+#    #+#             */
-/*   Updated: 2015/04/30 02:28:18 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/02/26 18:40:14 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/raytracer.h"
+#include "fractol.h"
 
 t_img		*new_image(void *mlx)
 {

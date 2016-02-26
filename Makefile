@@ -12,8 +12,8 @@
 
 CC				=	gcc
 NAME			=	fractol
-SRC				=	srcs/main.c
-
+SRC				=	srcs/main.c\
+					srcs/image.c
 OBJ				=	$(SRC:.c=.o)
 INCLUDE			=	-I/usr/X11R6/include -I/opt/X11/include -Iincludes
 CFLAGS			=	-Wextra -Wall -Werror -g -pg -Iincludes
@@ -27,14 +27,20 @@ END_SAVE		=	@echo " Save ended."
 SAVE_NAME		=	save_wolf3d.tar.gz
 SAVE_INC_NAME	=	fractol.h
 SAVE			=	tar cfz $(SAVE_NAME) Makefile $(SAVE_INC_NAME) $(SRC)
+UNAME_S 		:=  $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
 MINILIBX		=	-L/usr/X11/lib -lmlx -lX11 -lXext
+endif
+ifeq ($(UNAME_S),Darwin)
+MINILIBX 		= -lmlx -framework OpenGL -framework AppKit 
+endif
 LIBMATHS		=	-lm
 LIBFTDIR		=	libft/
 LIBFTH			=	-I$(LIBFTDIR)
 LIBFTFLAGS		=	-L$(LIBFTDIR) -lft
 
 $(NAME):	 makelibft $(OBJ)
-		$(CC) $(CFLAGS) $(MINILIBX) $(LIBMATHS) $(INCLUDE) -o $(NAME) $(OBJ) $(LIBFTH) $(LIBFTFLAGS) $(MINILIBX) $(LIBMATHS)
+		$(CC) $(CFLAGS) $(INCLUDE) -o $(NAME) $(OBJ) $(MINILIBX)
 
 makelibft:
 	make -C $(LIBFTDIR)
