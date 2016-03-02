@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 11:37:58 by takiapo           #+#    #+#             */
-/*   Updated: 2016/02/26 23:10:09 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/02 13:51:52 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,12 @@
 #include <unistd.h>
 #define	MAXITERATION 128
 
-void	julia(t_env *e)
+void	julia(t_env *e, t_coord pixel, void *data)
 {
-	t_complex	c;
-	t_complex	new;
-	t_complex	old;
-	int y = 0;
-	int x = 0;
-	int	i = 0;
-	t_img 	*img;
 
-	img = new_image(e->mlx);
+	img = new_image(e->mlx, SCREEN_W, SCREEN_H);
 	c.re = -0.2;
 	c.im = 0.175;
-
-	int color;
 	while (y < SCREEN_H)
 	{
 		x = 0;
@@ -47,7 +38,7 @@ void	julia(t_env *e)
 				i++;
 			}
 			color = (0x72A0C1 * i);
-			add_point(img, x, y, color);
+			add_point_int(img, x, y, color);
 			x++;
 		}
 		y++;
