@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/03 08:33:40 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/03 15:13:34 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_julia
 	t_complex		c;
 	t_complex		new;
 	t_complex		old;
+	t_complex		step;
 }					t_julia;
 
 typedef struct		s_coord
@@ -36,8 +37,10 @@ typedef struct  	s_env
 {
     void        	*mlx;
     void        	*win;
+	void			*data;
     t_img           *img;
-    int             (*fractal[2])(t_coord pixel, void *data);
-    void            (*init_data[2])(void *);
+    t_coord			old_pos;
+	int             (*fractal[2])(t_coord pixel, void *data);
+    void            (*init_data[2])(void **);
 }               	t_env;
 #endif

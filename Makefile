@@ -47,6 +47,7 @@ $(NAME): $(MINILIBXFT) $(LIBFT) $(OBJ)
 		$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(MYLIBS) $(MINILIBX)
 
 $(OBJ): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@$(INCLUDE)
 	@mkdir -p obj
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

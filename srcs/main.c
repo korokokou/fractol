@@ -6,73 +6,99 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 11:37:58 by takiapo           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2016/03/02 13:51:52 by takiapo          ###   ########.fr       */
-=======
-/*   Updated: 2016/03/03 08:09:15 by takiapo          ###   ########.fr       */
->>>>>>> array_pointers
+/*   Updated: 2016/03/03 16:18:32 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <unistd.h>
-#define	MAXITERATION 128
+#include <stdio.h>
+#include <limits.h>
+#define	MAXITERATION 256
 
-<<<<<<< HEAD
-void	julia(t_env *e, t_coord pixel, void *data)
+void    	draw_fractal(t_env *e, void *data);
+
+int			enter_window_hook(int x, int y, t_env *e)
 {
+	t_julia *j;
 
-	img = new_image(e->mlx, SCREEN_W, SCREEN_H);
-	c.re = -0.2;
-	c.im = 0.175;
-	while (y < SCREEN_H)
+	j = e->data;
+	e->old_pos.x = x;
+	e->old_pos.y = y;
+	return (0);
+}
+
+int			abs(int x)
+{
+	int	result;
+	int	mask;
+
+	mask = x >> (sizeof(int) * CHAR_BIT - 1);
+	result = (x + mask) ^ x;
+	return (result);
+}
+
+int			mouse_hook(int x, int y, t_env *e)
+{
+	t_julia *j;
+
+	if (x > 0 && x < SCREEN_W && y > 0 && y < SCREEN_H)
 	{
-		x = 0;
-		while (x < SCREEN_W)
-		{
-			new.re = 1.5 * (x - SCREEN_W / 2) / ( 0.5 * SCREEN_W);
-			new.im = (y - SCREEN_H / 2) / (0.5 * SCREEN_H);	
-			i = 0;
-			while (i < MAXITERATION)
-			{
-				old.re = new.re;
-				new.re = old.re * old.re - old.im * old.im + c.re;
-				new.im = 2 * old.re * new.im + c.im;
-				if ((new.re * new.re + new.im * new.im) > 4)
-					break ;
-				i++;
-			}
-			color = (0x72A0C1 * i);
-			add_point_int(img, x, y, color);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(e->mlx, e->win, img->img_ptr, 0, 0);
-=======
-void    init_julia(void *data)
+		j = e->data;
+		j->c.im += (e->old_pos.x - x) * 0.003;
+		j->c.re += (e->old_pos.y - y) * 0.003;
+       	e->old_pos.x = x;
+		e->old_pos.y = y;
+		draw_fractal(e, e->data);
+	}	
+	return (0);
+}
+
+int			expose_hook(t_env *e)
 {
-    data = malloc(sizeof(t_julia));
-    if (!data)
+	mlx_put_image_to_window(e->mlx, e->win, e->img->img_ptr, 0, 0);
+	return (0);
+}
+
+int			key_hook(int keycode, t_env *e)
+{
+	(void)e;
+	if (keycode == 53)
+		exit(0);
+	return (0);
+}
+
+void    init_julia(void **data)
+{
+    t_julia *j;	
+	*data = malloc(sizeof(t_julia));
+    if (!*data)
         exit(-1);
+	j = *data;
+	j->c.re = -0.2;
+	j->c.im = 0.175;
+	j->step.re = (3.0f / SCREEN_W);
+    j->step.im = (2.0f / SCREEN_H);	
+	j->new.re = -1.5;
+    j->new.im = -1;	
+	printf("%f   %f\n", j->step.re, j->step.im);
 }
 
 int 	julia(t_coord pixel, void *data)
 {
-
     int     i;
     t_julia *j;
     int     color;
 
-    if (!data)
-        exit (-1);
     i= 0;
-    j = data;
-    j->c.re = -0.2;
-    j->c.im = 0.175;
-    j->new.re = 1.5 * (pixel.x - SCREEN_W / 2) / ( 0.5 * SCREEN_W);
-    j->new.im = (pixel.y - SCREEN_H / 2) / (0.5 * SCREEN_H);	
-    while (i < MAXITERATION)
+	j = data;
+//	j->new.re += j->step.re;
+ //   j->new.im += j->step.im;	
+	j->new.re = 1.5 * pixel.x / (0.5 * SCREEN_W) - 1.5;
+    j->new.im = pixel.y / (0.5 * SCREEN_H) - 1;	
+	printf("%f   %f\n", j->new.re - (1.5 *( pixel.x - 1) / (0.5 * SCREEN_W) - 1.5), j->new.im  * ((pixel.y  -1)/ (0.5 * SCREEN_H) - 1));
+	(void)pixel;
+	while (i < MAXITERATION)
     {
         j->old.re = j->new.re;
         j->new.re = j->old.re * j->old.re - j->old.im * j->old.im
@@ -105,25 +131,26 @@ void    draw_fractal(t_env *e, void *data)
         }
         pixel.y++;
     }
-    mlx_put_image_to_window(e->mlx, e->win, e->img->img_ptr, 0, 0);
->>>>>>> array_pointers
+	mlx_put_image_to_window(e->mlx, e->win, e->img->img_ptr, 0, 0);
 }
 
 int		main(void)
 {
     t_env   e;
-    void    *data;
 
-    data = NULL;
     e.mlx = mlx_init();
     e.win = mlx_new_window(e.mlx, SCREEN_W, SCREEN_H, "fractol");
-    if (e.win)
+	if (e.win)
     {
         e.fractal[0] = julia;
         e.init_data[0] = init_julia;
-        init_julia(data);
-        draw_fractal(&e, data);
-          mlx_loop(e.mlx); 
+        init_julia(&(e.data));
+        draw_fractal(&e, e.data);
+		mlx_hook(e.win, KEYPRESS, KEYPRESSMASK, key_hook, &e);
+		mlx_hook(e.win, MOTIONNOTIFY, POINTERMOTIONMASK, mouse_hook, &e);
+		mlx_hook(e.win, ENTERNOTIFY, ENTERWINDOWMASK, enter_window_hook, &e);
+		mlx_expose_hook(e.win, expose_hook, &e);
+		mlx_loop(e.mlx); 
     }
     return (0);
 }
