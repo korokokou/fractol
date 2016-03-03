@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/02 13:48:39 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/03 08:36:12 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ typedef struct		s_color
 	uint8_t			blue;
 	uint8_t			trans;
 }					t_color;
-
-typedef struct  	s_env
-{
-    void        	*mlx;
-    void        	*win;
-}               	t_env;
 
 typedef struct		s_image
 {

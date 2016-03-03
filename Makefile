@@ -6,7 +6,7 @@
 #    By: rmichelo <rmichelo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 10:49:51 by rmichelo          #+#    #+#              #
-#*   Updated: 2016/02/26 13:31:36 by takiapo          ###   ########.fr       *#
+#*   Updated: 2016/03/03 08:34:13 by takiapo          ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ MINILIBXFTDIR	=	libxft
 OBJ				=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCLUDES		=	-I/usr/X11R6/include -I/opt/X11/include -Iincludes -I$(LIBFTDIR)/includes	-I$(MINILIBXFTDIR)/includes
-CFLAGS			=	-Wextra -Wall -Werror -g -pg
+CFLAGS			=	-Wextra -Wall -Werror -g
 
 BEGIN_COMPIL	=	@echo " Compilation launched."
 END_COMPIL		=	@echo " Compilation ended."
@@ -44,7 +44,7 @@ LIBMATHS		=	-lm
 MYLIBS			=	-L$(LIBFTDIR) -lft -L$(MINILIBXFTDIR) -lxft
 
 $(NAME): $(MINILIBXFT) $(LIBFT) $(OBJ)
-		$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(MINILIBX) $(MYLIBS)
+		$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(MYLIBS) $(MINILIBX)
 
 $(OBJ): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@mkdir -p obj
