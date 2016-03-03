@@ -6,7 +6,7 @@
 #    By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 21:45:12 by takiapo           #+#    #+#              #
-#    Updated: 2014/11/09 01:13:07 by takiapo          ###   ########.fr        #
+#    Updated: 2016/03/02 13:04:34 by takiapo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,25 +85,15 @@ all : $(OBJECTS) $(NAME)
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@mkdir -p obj
 	@gcc -c $(FLAGS) -I. -c $< -o $@
-	@echo -n '.'
 
 $(NAME):
-	@echo '.'
-	@echo 'objects libft done'
 	@ar -rc $(NAME) $(OBJECTS)
-	@echo 'library libft done'
 	@ranlib $(NAME)
-	@echo 'sort library libft done'
 
 clean :
 	@rm -rf $(OBJECTS)
-	@echo 'clean'
 
 fclean : clean
 	@rm -rf $(NAME)
-	@echo 'fclean'
 
 re: fclean all
-
-
-

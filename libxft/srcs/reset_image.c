@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   reset_image.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: YourUser <YourMail>                        +#+  +:+       +#+        */
+/*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/26 11:31:48 by YourUser          #+#    #+#             */
-/*   Updated: 2016/03/02 13:45:53 by takiapo          ###   ########.fr       */
+/*   Created: 2016/03/02 10:25:28 by takiapo           #+#    #+#             */
+/*   Updated: 2016/03/02 11:30:25 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "minilibxft.h"
 
-# define SCREEN_W 512 
-# define SCREEN_H 512 
+void		reset_image(t_img *img, int screen_width, int screen_height)
+{
+	int		limit;
+	int		start;
 
-# include <stdlib.h>
-# include <mlx.h>
-
-# include "libft.h"
-# include "struct_fractol.h"
-# include "minilibxft.h"
-
-#endif
+	start = 0;
+	limit = screen_width * screen_height * 4;
+	while (start < limit)
+	{
+		img->data[start] = 0;
+		start++;
+	}
+}
