@@ -6,47 +6,61 @@
 #    By: rmichelo <rmichelo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 10:49:51 by rmichelo          #+#    #+#              #
-#*   Updated: 2016/02/26 13:31:36 by takiapo          ###   ########.fr       *#
+#*   Updated: 2016/03/03 02:14:42 by takiapo          ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
 CC				=	gcc
 NAME			=	fractol
-SRC				=	srcs/main.c\
-					srcs/image.c
-OBJ				=	$(SRC:.c=.o)
-INCLUDE			=	-I/usr/X11R6/include -I/opt/X11/include -Iincludes
-CFLAGS			=	-Wextra -Wall -Werror -g -pg -Iincludes
-RM				=	rm -rf
+SRC				=	srcs/main.c
+
+LIBFT			=	libft/libft.a
+MINILIBXFT		=	libxft/libxft.a
+
+OBJDIR			=	obj
+SRCDIR			=	srcs
+LIBFTDIR		=	libft
+MINILIBXFTDIR	=	libxft
+
+OBJ				=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+
+INCLUDES		=	-I/usr/X11R6/include -I/opt/X11/include -Iincludes -I$(LIBFTDIR)/includes	-I$(MINILIBXFTDIR)/includes
+#CFLAGS			=	-Wextra -Wall -Werror -g
+
 BEGIN_COMPIL	=	@echo " Compilation launched."
 END_COMPIL		=	@echo " Compilation ended."
 BEGIN_CLEAN		=	@echo " Clean launched."
 END_CLEAN		=	@echo " Clean ended."
 BEGIN_SAVE		=	@echo " Save launched."
 END_SAVE		=	@echo " Save ended."
-SAVE_NAME		=	save_wolf3d.tar.gz
-SAVE_INC_NAME	=	fractol.h
-SAVE			=	tar cfz $(SAVE_NAME) Makefile $(SAVE_INC_NAME) $(SRC)
 UNAME_S 		:=  $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-MINILIBX		=	-L/usr/X11/lib -lmlx -lX11 -lXext
+	MINILIBX		=	-L/usr/X11/lib -lmlx -lX11 -lXext
 endif
 ifeq ($(UNAME_S),Darwin)
-MINILIBX 		= -lmlx -framework OpenGL -framework AppKit 
+	MINILIBX 		= -lmlx -framework OpenGL -framework AppKit 
 endif
 LIBMATHS		=	-lm
-LIBFTDIR		=	libft/
-LIBFTH			=	-I$(LIBFTDIR)
-LIBFTFLAGS		=	-L$(LIBFTDIR) -lft
+MYLIBS			=	-L$(LIBFTDIR) -lft -L$(MINILIBXFTDIR) -lxft
 
-$(NAME):	 makelibft $(OBJ)
-		$(CC) $(CFLAGS) $(INCLUDE) -o $(NAME) $(OBJ) $(MINILIBX)
+$(NAME): $(MINILIBXFT) $(LIBFT) $(OBJ)
+		$(CC) $(CFLAGS) $(INCLUDES) -o $(NAME) $(OBJ) $(MYLIBS) $(MINILIBX)
 
-makelibft:
+$(OBJ): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	@mkdir -p obj
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(LIBFT):
 	make -C $(LIBFTDIR)
+
+$(MINILIBXFT):
+	make -C $(MINILIBXFTDIR)
 
 makerelibft:
 	make -C $(LIBFTDIR) re
+
+makerelibxft:
+	make -C $(MINILIBXFTDIR) re
 
 all:		$(NAME)
 
@@ -120,6 +134,6 @@ end:
 		@echo " Installation successful."
 		@echo "\033[00m"
 
-re:		echo_name fclean makerelibft begin_compil all end_compil end
+re:		echo_name fclean makerelibft makerelibxft begin_compil all end_compil end
 
 .PHONY:		all clean re echo_name begin_compil end_compil save end
