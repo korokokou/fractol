@@ -12,7 +12,9 @@
 
 CC				=	gcc
 NAME			=	fractol
-SRC				=	srcs/main.c
+SRC				=	srcs/main.c\
+					srcs/julia.c\
+					srcs/mandelbrot.c
 
 LIBFT			=	libft/libft.a
 MINILIBXFT		=	libxft/libxft.a
