@@ -6,7 +6,7 @@
 /*   By: YourUser <YourMail>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 11:31:48 by YourUser          #+#    #+#             */
-/*   Updated: 2016/03/19 14:21:58 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 17:16:42 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # define KEYPRESS 2
 
 # include <unistd.h>
-# include <stdio.h>
 # include <limits.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <stdio.h>
+# include <math.h>
 # include <mlx.h>
 
 # include "minilibxft.h"
@@ -38,6 +39,7 @@
 int 	iterate(t_complex new, t_complex old, t_complex c);
 void	delete_coords(t_complex *j, t_complex *p);
 void	draw_fractal(t_env *e, void *data);
+void	init_burningsheep(t_env *e);
 void	init_mandelbrot(t_env *e);
 void	init_sierpinski(t_env *e);
 void	init_julia(t_env *e);

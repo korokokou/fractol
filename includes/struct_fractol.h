@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/19 14:20:38 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 17:12:34 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ typedef struct		s_complex
 	double			re;
 	double			im;
 }					t_complex;
+
+typedef struct		s_burningsheep
+{
+	t_complex		c;
+	t_complex		new;
+	t_complex		old;
+	t_complex		step;
+	t_coord			move;
+	float			zoom;
+}					t_burningsheep;
 
 typedef struct		s_mandelbrot
 {

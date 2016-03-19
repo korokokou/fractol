@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 12:10:20 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/19 14:43:08 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 17:16:22 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int		main(int ac, char **av)
 		init_mandelbrot(&e);
 	else if (!ft_strcmp("sierpinski", av[1]))
 		init_sierpinski(&e);
+	else if (!ft_strcmp("burningsheep", av[1]))
+		init_burningsheep(&e);
 	else
 	{
 		ft_putendl("fractol: usage \"fractol [julia, mandelbrot, sierpinski]\"\n"); 

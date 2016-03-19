@@ -16,6 +16,7 @@ SRC				=	srcs/main.c\
 					srcs/julia.c\
 					srcs/mandelbrot.c\
 					srcs/sierpinski.c\
+					srcs/burningsheep.c\
 					srcs/mandelbrot_plus.c
 
 LIBFT			=	libft/libft.a

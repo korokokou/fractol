@@ -35,7 +35,7 @@ all : $(OBJECTS) $(NAME)
 
 $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
 	@mkdir -p obj
-	@gcc -c $(FLAGS) -Iincludes -c $< -o $@
+	@gcc -c $(FLAGS) -g -Iincludes -c $< -o $@
 
 $(NAME):
 	@ar -rc $(NAME) $(OBJECTS)
