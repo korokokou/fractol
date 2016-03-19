@@ -22,6 +22,7 @@ SRC =	\
 		srcs/itoc.c\
 		srcs/ctoi.c\
 		srcs/new_image.c\
+		srcs/draw_lines.c\
 		srcs/reset_image.c\
 		srcs/add_point_int.c\
 		srcs/add_point_t_color.c

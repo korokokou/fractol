@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 12:10:20 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/15 16:37:32 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 14:43:08 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,15 @@ int		main(int ac, char **av)
 		return (0);
 	if (!ft_strcmp("julia", av[1]))
 		init_julia(&e);
-	if (!ft_strcmp("mandelbrot", av[1]))
+	else if (!ft_strcmp("mandelbrot", av[1]))
 		init_mandelbrot(&e);
+	else if (!ft_strcmp("sierpinski", av[1]))
+		init_sierpinski(&e);
+	else
+	{
+		ft_putendl("fractol: usage \"fractol [julia, mandelbrot, sierpinski]\"\n"); 
+		exit (-1);
+	}
 	mlx_expose_hook(e.win, expose_hook, &e);
 	mlx_hook(e.win, ENTERNOTIFY, ENTERWINDOWMASK, enter_window_hook, &e);
 	mlx_loop(e.mlx); 

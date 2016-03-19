@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/03 08:36:12 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 11:57:46 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define struct_minilibxft_H
 
 # include <stdint.h>
+
+typedef struct		s_coord
+{
+	int				x;
+	int				y;
+}					t_coord;
+
+typedef	struct		s_line
+{
+	t_coord			c1;
+	t_coord			c2;
+}					t_line;
 
 typedef struct		s_color
 {

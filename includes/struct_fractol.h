@@ -6,18 +6,12 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/15 16:33:36 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/19 14:20:38 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_FRACTOL_H
 # define STRUCT_FRACTOL_H
-
-typedef struct		s_coord
-{
-	double			x;
-	double			y;
-}					t_coord;
 
 typedef struct		s_complex
 {
@@ -54,5 +48,6 @@ typedef struct  	s_env
     t_coord			old_pos;
 	int             (*fractal[2])(t_coord pixel, void *data);
     void            (*init_data[2])(void **);
+	int				motion;
 }               	t_env;
 #endif
