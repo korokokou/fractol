@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 12:10:20 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/19 17:16:22 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/20 15:43:27 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		main(int ac, char **av)
 		init_burningsheep(&e);
 	else
 	{
-		ft_putendl("fractol: usage \"fractol [julia, mandelbrot, sierpinski]\"\n"); 
+		ft_putendl("fractol: usage \"fractol [julia, mandelbrot, sierpinski]\""); 
 		exit (-1);
 	}
 	mlx_expose_hook(e.win, expose_hook, &e);

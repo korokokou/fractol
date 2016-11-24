@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:26:33 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/20 13:29:26 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/20 17:06:45 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void		draw_julia(t_env *e, void *data)
 	e->img = new_image(e->mlx, SCREEN_W, SCREEN_H);
 	color = 0;
 	pixel.y = 0;
-	j->new.im = -1 + j->move.y;
+	j->new.im = -1 + j->move.im;
 	while (pixel.y < SCREEN_H)
 	{
 		pixel.x = 0;
-		j->new.re = -1.5 + j->move.x;
+		j->new.re = -1.5 + j->move.re;
 		while (pixel.x < SCREEN_W)
 		{
 			color = iterate(j->new, j->old, j->c);
@@ -42,12 +42,6 @@ void		draw_julia(t_env *e, void *data)
 
 int			julia_zoom_hook(int button, int x, int y, t_env *e)
 {
-(void)x;
-(void)y;
-(void)e;
-(void)button;
-
-	/*
 	t_julia *j;
 
 	if (x > 0 && x < SCREEN_W && y > 0 && y < SCREEN_H)
@@ -57,20 +51,20 @@ int			julia_zoom_hook(int button, int x, int y, t_env *e)
 		{
 			j->step.re /= 1.1;
 			j->step.im /= 1.1;
-			j->move.x += x * j->step.re;
-			j->move.y += y * j->step.im;
+			j->move.re = (j->move.re - (x * j->step.re));
+			j->move.im = (j->move.im - (y * j->step.im));
+			printf("%f  %f\n", j->move.re, j->move.im);
 			draw_julia(e, e->data);
 		}
 		if (button == 5)
 		{
 			j->step.re *= 1.1;
 			j->step.im *= 1.1;
-			j->move.x += x * j->step.re;
-			j->move.y += y * j->step.im;
+			j->move.re = -1.5 + x * j->step.re;
+			j->move.im = -1 + y * j->step.im;
 			draw_julia(e, e->data);
 		}
 	}
-*/
 	return (0);
 }
 
@@ -115,9 +109,11 @@ void		init_julia(t_env *e)
 	j->step.im = (2.0f / SCREEN_H);	
 	j->new.re = -100;
 	j->new.im = -100;	
-	j->move.x = 0;
-	j->move.y = 0;
+	j->move.re = 0;
+	j->move.im = 0;
 	e->motion = 0;
+	e->old_pos.x = SCREEN_W / 2;
+	e->old_pos.y = SCREEN_H / 2;
 	draw_julia(e, e->data);
 	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, julia_key_hook, e);
 	mlx_hook(e->win, MOTIONNOTIFY, POINTERMOTIONMASK, julia_mouse_hook, e);

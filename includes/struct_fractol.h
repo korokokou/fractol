@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/19 17:12:34 by takiapo          ###   ########.fr       */
+/*   Updated: 2016/03/20 16:49:49 by takiapo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct		s_julia
 	t_complex		new;
 	t_complex		old;
 	t_complex		step;
-	t_coord			move;
+	t_complex		move;
 	float			zoom;
 }					t_julia;
 
