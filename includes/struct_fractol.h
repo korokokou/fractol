@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/20 16:49:49 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/12 16:12:11 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ typedef struct		s_julia
 
 typedef struct  	s_env
 {
-    void        	*mlx;
-    void        	*win;
-	void			*data;
-    t_img           *img;
-    t_coord			old_pos;
+	void        	*mlx;
+    	void        	*win;
+	void		*data;
+	t_img           *img;
+	t_coord		old_pos;
 	int             (*fractal[2])(t_coord pixel, void *data);
-    void            (*init_data[2])(void **);
-	int				motion;
+	void            (*init_data[2])(void **);
+	int		motion;
 }               	t_env;
 #endif

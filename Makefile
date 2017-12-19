@@ -6,11 +6,11 @@
 #    By: rmichelo <rmichelo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 10:49:51 by rmichelo          #+#    #+#              #
-#*   Updated: 2016/03/03 08:34:13 by takiapo          ###   ########.fr       *#
+#*   Updated: 2017/12/11 17:33:45 by                  ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
-CC				=	gcc
+CC				=	cc
 NAME			=	fractol
 SRC				=	srcs/main.c\
 					srcs/julia.c\
@@ -30,7 +30,7 @@ MINILIBXFTDIR	=	libxft
 OBJ				=	$(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 INCLUDES		=	-I/usr/X11R6/include -I/opt/X11/include -Iincludes -I$(LIBFTDIR)/includes	-I$(MINILIBXFTDIR)/includes
-CFLAGS			=	-Wextra -Wall -Werror -g
+CFLAGS			=	-Wextra -Wall -Werror -g -fPIC
 
 BEGIN_COMPIL	=	@echo " Compilation launched."
 END_COMPIL		=	@echo " Compilation ended."
@@ -43,7 +43,7 @@ ifeq ($(UNAME_S),Linux)
 	MINILIBX		=	-L/usr/X11/lib -lmlx -lX11 -lXext
 endif
 ifeq ($(UNAME_S),Darwin)
-	MINILIBX 		= -lmlx -framework OpenGL -framework AppKit 
+	MINILIBX 		= -Llibxft -lmlx -framework OpenGL -framework AppKit 
 endif
 LIBMATHS		=	-lm
 MYLIBS			=	-L$(LIBFTDIR) -lft -L$(MINILIBXFTDIR) -lxft

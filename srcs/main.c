@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 12:10:20 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/20 15:43:27 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/19 16:05:47 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int			enter_window_hook(int x, int y, t_env *e)
 {
 	t_julia *j;
 
+	(void)j;
 	j = e->data;
 	e->old_pos.x = x;
 	e->old_pos.y = y;
@@ -62,29 +63,33 @@ int 	iterate(t_complex new, t_complex old, t_complex c)
 
 int		main(int ac, char **av)
 {
-	t_env   e;
+	t_env   *e;
 
 	if (ac != 2)
 		return (0);
-	e.mlx = mlx_init();
-	e.win = mlx_new_window(e.mlx, SCREEN_W, SCREEN_H, "fractol");
-	if (!e.win)
+	e = malloc(sizeof(t_env));
+	ft_bzero(e, sizeof(t_env));
+	if (!e)
+		return (0);
+	e->mlx = mlx_init();
+	e->win = mlx_new_window(e->mlx, SCREEN_W, SCREEN_H, "fractol");
+	if (!e->win)
 		return (0);
 	if (!ft_strcmp("julia", av[1]))
-		init_julia(&e);
+		init_julia(e);
 	else if (!ft_strcmp("mandelbrot", av[1]))
-		init_mandelbrot(&e);
+		init_mandelbrot(e);
 	else if (!ft_strcmp("sierpinski", av[1]))
-		init_sierpinski(&e);
+		init_sierpinski(e);
 	else if (!ft_strcmp("burningsheep", av[1]))
-		init_burningsheep(&e);
+		init_burningsheep(e);
 	else
 	{
 		ft_putendl("fractol: usage \"fractol [julia, mandelbrot, sierpinski]\""); 
 		exit (-1);
 	}
-	mlx_expose_hook(e.win, expose_hook, &e);
-	mlx_hook(e.win, ENTERNOTIFY, ENTERWINDOWMASK, enter_window_hook, &e);
-	mlx_loop(e.mlx); 
+	mlx_expose_hook(e->win, expose_hook, e);
+	mlx_hook(e->win, 6,  64, enter_window_hook, e);
+	mlx_loop(e->mlx); 
 	return (0);
 }

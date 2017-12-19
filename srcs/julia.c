@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:26:33 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/20 17:06:45 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/11 15:05:13 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			julia_key_hook(int keycode, t_env *e)
 {
 	t_julia *j;
 
+	(void)j;
 	j = e->data;
 	if (keycode == 53)
 		exit(0);

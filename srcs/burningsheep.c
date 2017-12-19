@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:20:48 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/20 13:25:02 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/11 15:06:41 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int			burningsheep_key_hook(int keycode, t_env *e)
 {
 	t_burningsheep *j;
 
+	(void)j;
 	j = e->data;
 	if (keycode == 53)
 		exit(0);

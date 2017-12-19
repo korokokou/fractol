@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 16:20:48 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/17 16:57:24 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/11 15:06:12 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int			mandelbrot_key_hook(int keycode, t_env *e)
 {
 	t_mandelbrot *j;
 
+	(void)j;
 	j = e->data;
 	if (keycode == 53)
 		exit(0);

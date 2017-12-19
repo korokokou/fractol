@@ -6,7 +6,7 @@
 /*   By: takiapo <takiapo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 13:22:29 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/19 11:57:46 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/12 17:16:56 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct		s_coord
 {
-	int				x;
-	int				y;
+	long				x;
+	long				y;
 }					t_coord;
 
 typedef	struct		s_line

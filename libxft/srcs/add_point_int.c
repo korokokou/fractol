@@ -6,7 +6,7 @@
 /*   By: takiapo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/02 10:28:41 by takiapo           #+#    #+#             */
-/*   Updated: 2016/03/02 13:27:11 by takiapo          ###   ########.fr       */
+/*   Updated: 2017/12/19 16:10:54 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void		add_point_int(t_img *img, int x, int y, int color_calc)
 
 	color = mlx_get_color_value(img->mlx, color_calc);	
 	colorx = itoc(color);
-	free(colorx);
 	if (img->endian == 0)
 	{
 		img->data[y * img->size_line + x * 4 + 3] = colorx->red;
@@ -29,9 +28,10 @@ void		add_point_int(t_img *img, int x, int y, int color_calc)
 	}
 	else if (img->endian == 1)
 	{
-		img->data[y * img->size_line + x * 4 + 0] = colorx->trans;
-		img->data[y * img->size_line + x * 4 + 1] = colorx->green;
-		img->data[y * img->size_line + x * 4 + 2] = colorx->blue;
+		img->data[y * img->size_line + x * 4 + 0] = colorx->red;
+		img->data[y * img->size_line + x * 4 + 1] = colorx->blue;
+		img->data[y * img->size_line + x * 4 + 2] = colorx->green;
 		img->data[y * img->size_line + x * 4 + 3] = colorx->trans;
 	}
+	free(colorx);
 }
